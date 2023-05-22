@@ -1,6 +1,6 @@
 package frontendservice.controller;
 
-import frontendservice.employeesgateway.CreateEmployeeCommand;
+import employees.model.CreateEmployeeRequest;
 import frontendservice.service.EmployeesService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,17 +29,17 @@ public class EmployeesController {
 
     @GetMapping("/create-employee")
     public ModelAndView createEmployee(Principal principal) {
-        log.info("Logged in user: {}", principal.getName());
+//        log.info("Logged in user: {}", principal.getName());
         var model = Map.of(
-                "command", new CreateEmployeeCommand(),
+                "command", new CreateEmployeeRequest(),
                 "roles", employeesService.listRoles()
         );
         return new ModelAndView("create-employee", model);
     }
 
     @PostMapping("/create-employee")
-    public ModelAndView createEmployeePost(@ModelAttribute CreateEmployeeCommand command) {
-        employeesService.createEmployee(command);
+    public ModelAndView createEmployeePost(@ModelAttribute CreateEmployeeRequest request) {
+        employeesService.createEmployee(request);
         return new ModelAndView("redirect:/employees");
     }
 
