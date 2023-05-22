@@ -1,0 +1,42 @@
+@startuml
+component core {
+component skill
+component skilllevel
+
+}
+
+component lowlevel {
+
+component role
+component employee
+component employeeskills
+component course
+component enrollment
+}
+
+component highlevel {
+component admitemployee
+
+component findcourse
+component completecourse
+}
+
+skilllevel --> skill
+employeeskills -> skilllevel
+
+role --> skilllevel
+
+course --> skilllevel
+
+admitemployee -> employee
+admitemployee -> employeeskills
+
+findcourse -down-> employee
+findcourse -> role
+findcourse -> employeeskills
+findcourse -> course
+
+completecourse -> course
+completecourse -> enrollment
+completecourse -> employeeskills
+@enduml

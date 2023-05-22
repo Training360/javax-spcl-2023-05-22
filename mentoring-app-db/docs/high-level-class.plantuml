@@ -1,0 +1,23 @@
+@startuml
+class Skill {
+  name
+}
+class SkillLevel {
+  level
+}
+class Role {
+  name
+}
+class Course {
+  name
+}
+class Employee {
+  name
+}
+SkillLevel -- Skill
+Role *--> SkillLevel : "Required skills"
+Course *--> SkillLevel : "Provided skills"
+Employee *--> SkillLevel : "Acquired skills"
+Employee -- Role
+Course -- Employee: "Enrolled"
+@enduml

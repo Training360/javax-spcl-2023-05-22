@@ -1,0 +1,19 @@
+@startuml
+class skilllevel.SkillLevel {
+  level
+}
+class course.Course <<ar>> {
+  name
+}
+class employee.Employee <<ar>> {
+  name
+}
+class employeeskills.EmployeeSkills <<ar>> {
+}
+class enrollment.Enrollment <<ar>> {
+}
+Employee <-- EmployeeSkills
+EmployeeSkills  *--> SkillLevel : "Acquired skills"
+Enrollment --> Course
+Employee <-- Enrollment
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+actor "Mentor" as m
+actor "Employee" as e
+rectangle "Mentoring Application" {
+  usecase "Manage skills" as ms
+  usecase "Manage roles" as mr
+  usecase "Announce course" as ac
+  usecase "Admit employee" as ae
+  usecase "Find course" as fc
+  usecase "Enroll to course" as ee
+  usecase "Complete the course" as cc
+}
+m --> mr
+m --> ms
+m --> ac
+m --> ae
+e --> fc
+e --> ee
+e --> cc
+@enduml
