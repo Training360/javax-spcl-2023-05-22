@@ -4,6 +4,7 @@ import courseservice.course.dto.*;
 import courseservice.course.model.Course;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,8 @@ public class CourseService {
     private CourseRepository courseRepository;
 
     private CourseMapper courseMapper;
+
+    private ApplicationEventPublisher applicationEventPublisher;
 
     public CourseView createCourse(CreateCourseCommand command) {
         var course =  Course.announceCourse(command);
@@ -37,7 +40,14 @@ public class CourseService {
     @Transactional
     public EnrollmentResult enroll(EnrollCommand command) {
         var course = courseRepository.findById(command.getCourseId()).orElseThrow();
-        return course.enroll(command);
+        var result = course.enroll(command);
+
+        course.getEvents().forEach(applicationEventPublisher::publishEvent);
+        return result;
     }
 
+    public void removeEmployee(long employeeId) {
+        //
+        log.info("To implement: remove employee from courses: {}", employeeId);
+    }
 }

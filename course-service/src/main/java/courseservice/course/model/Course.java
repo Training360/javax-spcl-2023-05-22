@@ -3,6 +3,7 @@ package courseservice.course.model;
 import courseservice.course.dto.CreateCourseCommand;
 import courseservice.course.dto.EnrollCommand;
 import courseservice.course.dto.EnrollmentResult;
+import courseservice.course.service.EmployeeHasBeenEnrolled;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,10 +32,13 @@ public class Course {
     private int limit;
 
     @ElementCollection
-    List<Long> enrolledEmployees;
+    private List<Long> enrolledEmployees;
 
     @ElementCollection
-    List<Long> completedEmployees;
+    private List<Long> completedEmployees;
+
+    @Transient
+    private List<Object> events;
 
     public static Course announceCourse(CreateCourseCommand command) {
         var course = new Course();
@@ -54,6 +58,7 @@ public class Course {
         }
         else {
             enrolledEmployees.add(command.getEmployeeId());
+            events.add(new EmployeeHasBeenEnrolled(command.getCourseId(), command.getEmployeeId()));
             return EnrollmentResult.successfull();
         }
     }
