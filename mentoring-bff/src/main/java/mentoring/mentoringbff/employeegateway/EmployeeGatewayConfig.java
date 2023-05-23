@@ -1,4 +1,4 @@
-package employeegateway;
+package mentoring.mentoringbff.employeegateway;
 
 import employees.api.EmployeeControllerApi;
 import employees.api.RoleControllerApi;

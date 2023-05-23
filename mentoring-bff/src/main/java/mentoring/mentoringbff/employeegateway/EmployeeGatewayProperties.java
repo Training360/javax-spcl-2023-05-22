@@ -1,4 +1,4 @@
-package employeegateway;
+package mentoring.mentoringbff.employeegateway;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

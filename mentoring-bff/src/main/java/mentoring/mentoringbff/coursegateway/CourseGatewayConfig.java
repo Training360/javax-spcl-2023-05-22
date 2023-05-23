@@ -1,4 +1,4 @@
-package coursegateway;
+package mentoring.mentoringbff.coursegateway;
 
 import courses.api.CourseControllerApi;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
