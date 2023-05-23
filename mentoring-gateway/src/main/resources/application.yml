@@ -1,0 +1,25 @@
+server:
+  port: 8085
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: roles
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/api/roles/**
+          filters:
+            - AddResponseHeader=X-Response-Color, Blue
+        - id: employees
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/api/employees/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: employeesCircuitBreaker
+                fallbackUri: forward:/dummy/api/employees
+        - id: courses
+          uri: http://localhost:8083/
+          predicates:
+            - Path=/api/courses/**

@@ -13,7 +13,7 @@ POST http://localhost:8083/api/courses
 Content-Type: application/json
 
 {
-  "name": "Advanced Java development",
+  "name": "Beginner Java development",
   "description": "Learn Java",
   "syllabus": "Java SE",
   "limit": 5
@@ -25,9 +25,10 @@ POST http://localhost:8083/api/courses/1/enrollments
 Content-Type: application/json
 
 {
-  "employeeId": 1,
+  "employeeId": 2,
   "courseId": 1
 }
+
 
 ### Create course - lorem
 
