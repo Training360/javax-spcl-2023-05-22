@@ -1,0 +1,11 @@
+### List roles
+GET http://localhost:8085/api/roles
+Accept: application/json
+
+### List employeees
+GET http://localhost:8085/api/employees
+Accept: application/json
+
+### List courses
+GET http://localhost:8085/api/courses
+Accept: application/json
