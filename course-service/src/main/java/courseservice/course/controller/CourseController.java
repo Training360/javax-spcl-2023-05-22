@@ -1,8 +1,6 @@
 package courseservice.course.controller;
 
-import courseservice.course.dto.CourseDetailsView;
-import courseservice.course.dto.CreateCourseCommand;
-import courseservice.course.dto.CourseView;
+import courseservice.course.dto.*;
 import courseservice.course.service.CourseService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,6 +29,16 @@ public class CourseController {
     @ResponseStatus(HttpStatus.CREATED)
     public CourseView create(@RequestBody CreateCourseCommand command) {
         return courseService.createCourse(command);
+    }
+
+    @PostMapping("/{id}/enrollments")
+    @ResponseStatus(HttpStatus.CREATED)
+    public EnrollmentResult enroll(@PathVariable("id") long id, @RequestBody EnrollCommand command) {
+        if (command.getCourseId() != id) {
+            throw new IllegalArgumentException("Ids not match");
+        }
+//        command.setCourseId(id);
+        return courseService.enroll(command);
     }
 
 

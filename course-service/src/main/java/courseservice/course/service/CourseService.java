@@ -1,9 +1,6 @@
 package courseservice.course.service;
 
-import courseservice.course.dto.CourseDetailsView;
-import courseservice.course.dto.CourseView;
-import courseservice.course.dto.CreateCourseCommand;
-import courseservice.course.dto.EnrollCommand;
+import courseservice.course.dto.*;
 import courseservice.course.model.Course;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +24,7 @@ public class CourseService {
         return courseMapper.toView(course);
     }
 
+    @Transactional(readOnly = true)
     public CourseDetailsView findCourseById(long id) {
         var course = courseRepository.findById(id).orElseThrow();
         return courseMapper.toDetailsView(course);
@@ -37,7 +35,7 @@ public class CourseService {
     }
 
     @Transactional
-    public boolean enroll(EnrollCommand command) {
+    public EnrollmentResult enroll(EnrollCommand command) {
         var course = courseRepository.findById(command.getCourseId()).orElseThrow();
         return course.enroll(command);
     }

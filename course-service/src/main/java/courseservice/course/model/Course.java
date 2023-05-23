@@ -2,6 +2,7 @@ package courseservice.course.model;
 
 import courseservice.course.dto.CreateCourseCommand;
 import courseservice.course.dto.EnrollCommand;
+import courseservice.course.dto.EnrollmentResult;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -39,21 +40,21 @@ public class Course {
         var course = new Course();
         course.setName(command.getName());
         course.setDescription(command.getDescription());
-        course.setSyllabus(course.getSyllabus());
-        course.setLimit(course.getLimit());
+        course.setSyllabus(command.getSyllabus());
+        course.setLimit(command.getLimit());
         return course;
     }
 
-    public boolean enroll(EnrollCommand command) {
+    public EnrollmentResult enroll(EnrollCommand command) {
         if (alreadyEnrolled(command)) {
-            return true;
+            return EnrollmentResult.successfull();
         }
         if (isFull()) {
-            return false;
+            return EnrollmentResult.unsuccessfull();
         }
         else {
             enrolledEmployees.add(command.getEmployeeId());
-            return true;
+            return EnrollmentResult.successfull();
         }
     }
 
