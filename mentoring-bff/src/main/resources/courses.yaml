@@ -1,0 +1,150 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8083
+  description: Generated server url
+paths:
+  /api/courses:
+    get:
+      tags:
+      - course-controller
+      operationId: findAllCourses
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseView'
+    post:
+      tags:
+      - course-controller
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCourseCommand'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CourseView'
+  /api/courses/{id}/enrollments:
+    post:
+      tags:
+      - course-controller
+      operationId: enroll
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollCommand'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EnrollmentResult'
+  /api/courses/{id}:
+    get:
+      tags:
+      - course-controller
+      operationId: findCourseById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CourseDetailsView'
+components:
+  schemas:
+    CreateCourseCommand:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        syllabus:
+          type: string
+        limit:
+          type: integer
+          format: int32
+    CourseView:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        limit:
+          type: integer
+          format: int32
+    EnrollCommand:
+      type: object
+      properties:
+        courseId:
+          type: integer
+          format: int64
+        employeeId:
+          type: integer
+          format: int64
+    EnrollmentResult:
+      type: object
+      properties:
+        success:
+          type: string
+          enum:
+          - SUCCESSFULL
+          - UNSUCCESSFULL
+    CourseDetailsView:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        syllabus:
+          type: string
+        limit:
+          type: integer
+          format: int32
+        enrolledEmployees:
+          type: array
+          items:
+            type: integer
+            format: int64
+        completedEmployees:
+          type: array
+          items:
+            type: integer
+            format: int64
