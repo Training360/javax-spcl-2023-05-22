@@ -1,34 +1,33 @@
 package frontendservice.service;
 
+import employees.api.EmployeeControllerApi;
+import employees.api.RoleControllerApi;
 import employees.model.CreateEmployeeRequest;
 import employees.model.EmployeeDto;
 import employees.model.RoleDto;
-import frontendservice.employeegateway.EmployeeClient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class EmployeesService {
 
-    private EmployeeClient employeeClient;
+    private EmployeeControllerApi employeeControllerApi;
+
+    private RoleControllerApi roleControllerApi;
 
     public List<EmployeeDto> listEmployees() {
-        return employeeClient.listEmployees();
+        return employeeControllerApi.employees().getBody();
     }
 
     public List<RoleDto> listRoles() {
-        return employeeClient.listRoles();
+        return roleControllerApi.findAll().getBody();
     }
 
     public void createEmployee(CreateEmployeeRequest request) {
-        employeeClient.createEmployees(request);
+        employeeControllerApi.createEmployee(request);
     }
 
 }

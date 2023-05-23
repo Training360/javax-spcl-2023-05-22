@@ -125,6 +125,7 @@
 				<version>6.4.0</version>
 				<executions>
 					<execution>
+						<id>generate-employees</id>
 						<goals>
 							<goal>generate</goal>
 						</goals>
@@ -133,21 +134,40 @@
 								${project.basedir}/src/main/resources/employees.yaml
 							</inputSpec>
 							<generatorName>spring</generatorName>
-							<generateApis>false</generateApis>
-							<!--
-							Enélkül:
-							cannot find symbol ApiUtil
-							-->
-							<supportingFilesToGenerate>
+<!--							<generateApis>false</generateApis>-->
+							<generateSupportingFiles>false</generateSupportingFiles>
 
-							</supportingFilesToGenerate>
+							<modelPackage>employees.model</modelPackage>
+							<apiPackage>employees.api</apiPackage>
+
 							<configOptions>
-								<interfaceOnly>true</interfaceOnly>
-
+								<library>spring-http-interface</library>
+								<documentationProvider>none</documentationProvider>
 								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
-							<apiPackage>employees.api</apiPackage>
-							<modelPackage>employees.model</modelPackage>
+						</configuration>
+					</execution>
+					<execution>
+						<id>generate-courses</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>
+								${project.basedir}/src/main/resources/courses.yaml
+							</inputSpec>
+							<generatorName>spring</generatorName>
+							<!--							<generateApis>false</generateApis>-->
+							<generateSupportingFiles>false</generateSupportingFiles>
+
+							<modelPackage>courses.model</modelPackage>
+							<apiPackage>courses.api</apiPackage>
+
+							<configOptions>
+								<library>spring-http-interface</library>
+								<documentationProvider>none</documentationProvider>
+								<useJakartaEe>true</useJakartaEe>
+							</configOptions>
 						</configuration>
 					</execution>
 				</executions>

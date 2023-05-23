@@ -1,5 +1,7 @@
 package frontendservice.employeegateway;
 
+import employees.api.EmployeeControllerApi;
+import employees.api.RoleControllerApi;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,9 +14,16 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 public class EmployeeGatewayConfig {
 
     @Bean
-    public EmployeeClient employeeClient(WebClient.Builder builder, EmployeeGatewayProperties properties) {
+    public EmployeeControllerApi employeeClient(WebClient.Builder builder, EmployeeGatewayProperties properties) {
         var client = builder.baseUrl(properties.getEmployeeServiceUrl()).build();
         var factory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(client)).build();
-        return factory.createClient(EmployeeClient.class);
+        return factory.createClient(EmployeeControllerApi.class);
+    }
+
+    @Bean
+    public RoleControllerApi roleClient(WebClient.Builder builder, EmployeeGatewayProperties properties) {
+        var client = builder.baseUrl(properties.getEmployeeServiceUrl()).build();
+        var factory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(client)).build();
+        return factory.createClient(RoleControllerApi.class);
     }
 }
