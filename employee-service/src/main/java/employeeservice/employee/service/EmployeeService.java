@@ -4,10 +4,12 @@ import employeeservice.NotFoundException;
 import employeeservice.employee.dto.CreateEmployeeRequest;
 import employeeservice.employee.dto.EmployeeDto;
 import employeeservice.employee.dto.UpdateEmployeeRequest;
+import employeeservice.employee.messages.EmployeeHasBeenDeleted;
 import employeeservice.employee.model.Employee;
 import employeeservice.role.service.RoleRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,8 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     private RoleRepository roleRepository;
+
+    private ApplicationEventPublisher applicationEventPublisher;
 
     public EmployeeDto createEmployee(CreateEmployeeRequest request) {
         var role = roleRepository.findById(request.getRoleId())
@@ -56,5 +60,6 @@ public class EmployeeService {
         var employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Employee not found with id: " + id));
         employeeRepository.delete(employee);
+        applicationEventPublisher.publishEvent(new EmployeeHasBeenDeleted(id));
     }
 }
