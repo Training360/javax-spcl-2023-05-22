@@ -30,3 +30,9 @@ docker run -d -e POSTGRES_DB=career -e POSTGRES_USER=career -e POSTGRES_PASSWORD
 ```shell
 docker run -d -e "discovery.type=single-node" -e xpack.security.enabled=false -p 9200:9200 -p 9300:9300 --name elasticsearch elasticsearch:8.6.1
 ```
+
+## Zipkin
+
+```shell
+docker run -d -p 9411:9411 --name zipkin openzipkin/zipkin
+```
