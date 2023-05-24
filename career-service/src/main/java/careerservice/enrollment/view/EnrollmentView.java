@@ -11,6 +11,4 @@ public class EnrollmentView {
     private long employeeId;
 
     private long courseId;
-
-    private EnrollmentStatus status;
 }

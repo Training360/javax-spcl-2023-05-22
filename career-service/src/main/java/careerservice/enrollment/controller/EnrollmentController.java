@@ -25,6 +25,6 @@ public class EnrollmentController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public EnrollmentView enrollToCourse(@RequestBody EnrollCommand command) {
-        return enrollSaga.enroll(command);
+        
     }
 }

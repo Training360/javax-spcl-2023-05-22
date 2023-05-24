@@ -16,9 +16,6 @@ public class Enrollment {
 
     private long courseId;
 
-    @Enumerated(EnumType.STRING)
-    private EnrollmentStatus status;
-
     private Enrollment() {
 
     }
@@ -27,15 +24,7 @@ public class Enrollment {
         var enrollment = new Enrollment();
         enrollment.employeeId = command.getEmployeeId();
         enrollment.courseId = command.getCourseId();
-        enrollment.status = EnrollmentStatus.INTENTIONED;
         return enrollment;
     }
 
-    public void registered() {
-        status = EnrollmentStatus.REGISTERED;
-    }
-
-    public void cancel() {
-        status = EnrollmentStatus.CANCELLED;
-    }
 }
