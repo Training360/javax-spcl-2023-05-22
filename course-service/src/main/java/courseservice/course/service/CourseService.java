@@ -24,6 +24,10 @@ public class CourseService {
     public CourseView createCourse(CreateCourseCommand command) {
         var course =  Course.announceCourse(command);
         courseRepository.save(course);
+
+        var event = new CourseHasBeenCreated(course.getId(), course.getName(), course.getDescription(), course.getSyllabus());
+        applicationEventPublisher.publishEvent(event);
+
         return courseMapper.toView(course);
     }
 
