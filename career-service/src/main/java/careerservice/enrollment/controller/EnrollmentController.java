@@ -1,8 +1,8 @@
 package careerservice.enrollment.controller;
 
+import careerservice.enrollment.saga.EnrollmentSaga;
 import careerservice.enrollment.view.EnrollmentView;
 import careerservice.enrollment.model.EnrollCommand;
-import careerservice.saga.EnrollSaga;
 import careerservice.enrollment.service.EnrollmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +17,8 @@ public class EnrollmentController {
 
     private EnrollmentService enrollmentService;
 
+    private EnrollmentSaga enrollmentSaga;
+
     @GetMapping
     public List<EnrollmentView> findAllByEmployee(@RequestParam long employeeId) {
         return enrollmentService.findAllByEmployee(employeeId);
@@ -25,6 +27,6 @@ public class EnrollmentController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public EnrollmentView enrollToCourse(@RequestBody EnrollCommand command) {
-        
+        return enrollmentSaga.enroll(command);
     }
 }

@@ -1,6 +1,5 @@
 package careerservice.enrollment.view;
 
-import careerservice.enrollment.model.EnrollmentStatus;
 import lombok.Data;
 
 @Data

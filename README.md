@@ -18,3 +18,9 @@ docker run -d -e POSTGRES_DB=course -e POSTGRES_USER=course -e POSTGRES_PASSWORD
 cd kafka
 docker compose up -d
 ```
+
+## Career service
+
+```shell
+docker run -d -e POSTGRES_DB=career -e POSTGRES_USER=career -e POSTGRES_PASSWORD=career -p 5435:5432  --name career-postgres postgres
+```

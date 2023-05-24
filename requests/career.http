@@ -1,0 +1,70 @@
+### Enroll
+
+POST http://localhost:8084/api/enrollments
+Content-Type: application/json
+
+{
+  "employeeId": 1,
+  "courseId": 1
+}
+
+### List enrollments
+GET http://localhost:8084/api/enrollments?employeeId=1
+
+### Employee skills
+
+GET http://localhost:8084/api/employee-skills/1
+
+
+### Assign skills to employee
+POST http://localhost:8084/api/employee-skills
+Content-Type: application/json
+
+{
+  "employeeId": 1,
+  "skills": [
+    {"skillId": 1, "level": 1}, 
+    {"skillId": 2, "level": 1}
+    ]
+  }
+}
+
+### Upgrade skills
+POST http://localhost:8084/api/employee-skills
+Content-Type: application/json
+
+{
+  "employeeId": 1,
+  "skills": [
+    {"skillId": 1, "level": 4}, 
+    {"skillId": 2, "level": 5}
+    ]
+  }
+}
+
+### Course skills
+
+GET http://localhost:8084/api/course-skills/1
+
+
+### Assign skills to course
+POST http://localhost:8084/api/course-skills
+Content-Type: application/json
+
+{
+  "courseId": 1,
+  "skills": [
+    {"skillId": 1, "level": 3}, 
+    {"skillId": 2, "level": 5}
+    ]
+  }
+}
+
+### Complete course
+POST http://localhost:8084/api/complete-course
+Content-Type: application/json
+
+{
+  "employeeId": 1,
+  "courseId": 1  
+}

@@ -23,4 +23,9 @@ public class EnrollmentService {
         return enrollmentMapper.toViews(enrollmentRepository.findAllByEmployeeId(employeeId));
     }
 
+    public EnrollmentView enroll(EnrollCommand command) {
+        var enrollment = Enrollment.enrollToCourse(command);
+        enrollmentRepository.save(enrollment);
+        return enrollmentMapper.toView(enrollment);
+    }
 }
