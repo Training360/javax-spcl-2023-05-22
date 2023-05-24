@@ -58,7 +58,7 @@ public class Course {
         }
         else {
             enrolledEmployees.add(command.getEmployeeId());
-            events.add(new EmployeeHasBeenEnrolled(command.getCourseId(), command.getEmployeeId()));
+//            events.add(new EmployeeHasBeenEnrolled(command.getCourseId(), command.getEmployeeId()));
             return EnrollmentResult.successfull();
         }
     }

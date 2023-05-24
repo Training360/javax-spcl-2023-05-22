@@ -42,7 +42,7 @@ public class CourseService {
         var course = courseRepository.findById(command.getCourseId()).orElseThrow();
         var result = course.enroll(command);
 
-        course.getEvents().forEach(applicationEventPublisher::publishEvent);
+//        course.getEvents().forEach(applicationEventPublisher::publishEvent);
         return result;
     }
 

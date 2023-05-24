@@ -1,5 +1,6 @@
 package careerservice.enrollment.service;
 
+import careerservice.enrollment.model.EnrollmentStatus;
 import careerservice.enrollment.view.EnrollmentView;
 import careerservice.enrollment.model.EnrollCommand;
 import careerservice.enrollment.model.Enrollment;
@@ -27,5 +28,16 @@ public class EnrollmentService {
         var enrollment = Enrollment.enrollToCourse(command);
         enrollmentRepository.save(enrollment);
         return enrollmentMapper.toView(enrollment);
+    }
+
+    @Transactional
+    public void complete(long courseId, long employeeId) {
+        var enrollment = enrollmentRepository.findByCourseIdAndEmployeeId(courseId, employeeId).orElseThrow();
+        enrollment.complete();
+    }
+
+    public void cancel(long courseId, long employeeId) {
+        var enrollment = enrollmentRepository.findByCourseIdAndEmployeeId(courseId, employeeId).orElseThrow();
+        enrollment.cancel();
     }
 }
